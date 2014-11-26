@@ -3,6 +3,7 @@ require 'puppet/type/mysql_grant'
 describe Puppet::Type.type(:mysql_grant) do
 
   before :each do
+    Puppet::Provider::Mysql.stubs(:mysql).with('--version').returns('mysql  Ver 15.1 Distrib 10.0.12-MariaDB')
     @user = Puppet::Type.type(:mysql_grant).new(:name => 'foo@localhost/*.*', :privileges => ['ALL', 'PROXY'], :table => ['*.*','@'], :user => 'foo@localhost')
   end
 

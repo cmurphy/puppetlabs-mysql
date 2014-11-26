@@ -2,6 +2,10 @@ require 'puppet'
 require 'puppet/type/mysql_user'
 describe Puppet::Type.type(:mysql_user) do
 
+  before :each do
+    Puppet::Provider::Mysql.stubs(:mysql).with('--version').returns('mysql  Ver 15.1 Distrib 10.0.12-MariaDB')
+  end
+
   it 'should require a name' do
     expect {
       Puppet::Type.type(:mysql_user).new({})
